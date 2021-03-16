@@ -1,0 +1,170 @@
+@prefix : <https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl> .
+
+<https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl> rdf:type owl:Ontology ;
+                                                                                  rdfs:comment "this is an attempt to describe the elusive terms named art and emotion"@en ;
+                                                                                  rdfs:isDefinedBy "gottlob urrhythm"@en ;
+                                                                                  rdfs:label "immaterial entities"@en ;
+                                                                                  rdfs:seeAlso "the arts"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#inspired_by
+:inspired_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :inspires .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#inspires
+:inspires rdf:type owl:ObjectProperty .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#leads_to
+:leads_to rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf :results_from .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#results_from
+:results_from rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#anger
+:anger rdf:type owl:Class ;
+       rdfs:subClassOf :emotion ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :leads_to ;
+                         owl:someValuesFrom :hate
+                       ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#art
+:art rdf:type owl:Class ;
+     rdfs:subClassOf :immaterial_entity ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :inspired_by ;
+                       owl:someValuesFrom :emotion
+                     ] ;
+     owl:disjointWith :emotion .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#audible_art
+:audible_art rdf:type owl:Class ;
+             rdfs:subClassOf :art .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#bodily_art
+:bodily_art rdf:type owl:Class ;
+            rdfs:subClassOf :art .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#emotion
+:emotion rdf:type owl:Class ;
+         rdfs:subClassOf :immaterial_entity ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :inspires ;
+                           owl:someValuesFrom :art
+                         ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#fear
+:fear rdf:type owl:Class ;
+      rdfs:subClassOf :emotion ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :leads_to ;
+                        owl:someValuesFrom :hate
+                      ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#gratitude
+:gratitude rdf:type owl:Class ;
+           rdfs:subClassOf :emotion ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :leads_to ;
+                             owl:someValuesFrom :love
+                           ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#hate
+:hate rdf:type owl:Class ;
+      rdfs:subClassOf :emotion ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :results_from ;
+                        owl:someValuesFrom :anger
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :results_from ;
+                        owl:someValuesFrom :fear
+                      ] ;
+      owl:disjointWith :love .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#immaterial_entity
+:immaterial_entity rdf:type owl:Class .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#joy
+:joy rdf:type owl:Class ;
+     rdfs:subClassOf :emotion ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :leads_to ;
+                       owl:someValuesFrom :love
+                     ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#love
+:love rdf:type owl:Class ;
+      rdfs:subClassOf :emotion ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :results_from ;
+                        owl:someValuesFrom :gratitude
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :results_from ;
+                        owl:someValuesFrom :joy
+                      ] .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#smellable_art
+:smellable_art rdf:type owl:Class ;
+               rdfs:subClassOf :art .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#tastable_art
+:tastable_art rdf:type owl:Class ;
+              rdfs:subClassOf :art .
+
+
+###  https://github.com/gttlb/immaterial_entities/blob/main/immaterial_entities.ttl#visual_art
+:visual_art rdf:type owl:Class ;
+            rdfs:subClassOf :art .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :anger
+                :fear
+                :gratitude
+                :hate
+                :joy
+                :love
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
